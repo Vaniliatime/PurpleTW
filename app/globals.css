@@ -35,3 +35,101 @@ body {
 .blink-caret {
   animation: blink 1s step-start infinite;
 }
+
+@keyframes rainbow-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-rainbow-border {
+  animation: rainbow-border 6s linear infinite;
+}
+
+/* Styl dla ikonek mediów społecznościowych  footer*/
+i {
+  transition: color 0.3s ease;
+}
+
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Stylizacja footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+footer a {
+  color: white;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  color: #8b5cf6; /* Fioletowy kolor na hover */
+}
+
+/* Stylizacja About ME*/
+
+/* Sekcja About Me */
+section#about-me {
+  background-color: #f8f9fa; /* Jasne tło sekcji */
+
+}
+
+/* Styl dla nagłówka */
+h2 {
+  color: #3b82f6; /* Niebieski kolor nagłówka */
+  font-weight: 700;
+  font-size: 2.25rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Opis tekstu */
+p {
+  font-size: 1.125rem;
+  color: #6b7280; /* Szary kolor tekstu */
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  max-width: 800px; /* Szerokość tekstu */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Subtelne wyróżnienie najważniejszych słów */
+.text-purple-600 {
+  color: #8b5cf6; /* Subtelny fioletowy */
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+/* Linia gradientowa oddzielająca */
+.bg-gradient-to-r {
+  background-size: 300% 300%;
+  animation: gradient-border 6s ease infinite;
+}

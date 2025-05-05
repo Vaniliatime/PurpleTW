@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 const phrases = [
-    "Design it. Code it. Make it real.",
+    "Design it. Code it.\nMake it real.",
     "Interactive by nature.\nDigital by design.",
     "From game worlds\nto web apps.",
     "Build it. Play it. Ship it.",

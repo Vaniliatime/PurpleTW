@@ -40,22 +40,51 @@ export default function HeroSection() {
 
 
 
+{/* Przyciski */}
+<div className="flex flex-col sm:flex-row justify-center xl:justify-start gap-4 mt-8">
+  <a
+    href="/projects"
+    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-black rounded-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-lg"
+    style={{
+      backgroundColor: "white", // Białe tło
+      border: "2px solid transparent", // Przezroczysta ramka
+      borderRadius: "10px",  // Zaokrąglenie rogów
+      backgroundImage:
+        "linear-gradient(white, white), linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899)", // Dopasowany gradient w odcieniach niebieskiego i fioletowego
+      backgroundOrigin: "border-box",
+      backgroundClip: "padding-box, border-box",
+      backgroundSize: "300% 300%",
+      animation: "rainbow-border 6s linear infinite", // Animacja gradientu na ramce
+    }}
+  >
+    <span className="relative z-10 flex items-center gap-2">
+      <i className="bi bi-code-slash me-2" /> Explore Projects
+    </span>
+  </a>
 
-            {/* Przyciski */}
-            <div className="flex flex-col sm:flex-row justify-center xl:justify-start gap-4 mt-8">
-                <a
-                href="/projects"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold border border-black text-black rounded-lg hover:bg-black hover:text-white transition"
-                >
-                <i className="bi bi-code-slash me-2" /> Explore Projects
-                </a>
-                <a
-                href="/resume"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                >
-                <i className="bi bi-file-earmark-person-fill me-2" /> View Resume
-                </a>
-            </div>
+  <a
+    href="/resume"
+    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-black rounded-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-lg"
+    style={{
+      backgroundColor: "white", // Białe tło
+      border: "2px solid transparent", // Przezroczysta ramka
+      borderRadius: "10px",  // Zaokrąglenie rogów
+      backgroundImage:
+        "linear-gradient(white, white), linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899)", // Dopasowany gradient w odcieniach niebieskiego i fioletowego
+      backgroundOrigin: "border-box",
+      backgroundClip: "padding-box, border-box",
+      backgroundSize: "300% 300%",
+      animation: "rainbow-border 6s linear infinite", // Animacja gradientu na ramce
+    }}
+  >
+    <span className="relative z-10 flex items-center gap-2">
+      <i className="bi bi-file-earmark-person-fill me-2" /> View Resume
+    </span>
+  </a>
+</div>
+
+
+
             </div>
 
           {/* PRAWA STRONA */}
@@ -83,10 +112,10 @@ export default function HeroSection() {
 <div className="absolute left-[2rem] top-[10rem] hidden sm:block z-0 opacity-80 animate-fade-in-up delay-300">
   <DotsColumn color="#FFFFFF" />
 </div>
-<div className="absolute left-[-3.5rem] top-[14rem] hidden sm:block z-0 opacity-40 animate-pulse-slow translate-y-[50%]">
+<div className="absolute left-[-3.5rem] top-[14rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
   <DotsColumn color="#A855F7" />
 </div>
-<div className="absolute left-[-2rem] top-[14rem] hidden sm:block z-0 opacity-40 animate-pulse-slow translate-y-[50%] delay-100">
+<div className="absolute left-[-2rem] top-[14rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
   <DotsColumn color="#A855F7" />
 </div>
 
@@ -101,10 +130,10 @@ export default function HeroSection() {
 </div>
 
 {/* Fioletowe zostają jak były */}
-<div className="absolute right-[-2rem] top-[6rem] hidden sm:block z-0 opacity-40 animate-pulse-slow delay-100">
+<div className="absolute right-[-2rem] top-[6rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
   <DotsColumn color="#A855F7" />
 </div>
-<div className="absolute right-[-3.5rem] top-[6rem] hidden sm:block z-0 opacity-40 animate-pulse-slow">
+<div className="absolute right-[-3.5rem] top-[6rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
   <DotsColumn color="#A855F7" />
 </div>
 
