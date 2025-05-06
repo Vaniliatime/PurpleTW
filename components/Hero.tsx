@@ -1,157 +1,139 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import AnimatedTagline from "./AnimatedTagline"; 
+import AnimatedTagline from "./AnimatedTagline";
 import Badge from "./Badge";
 import DotsColumn from "./DotsColumn";
 
-
-
-
 export default function HeroSection() {
+  const scrollToAbout = () => {
+    const section = document.getElementById("about-me");
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="w-full bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
-        <div className="flex flex-col-reverse xl:flex-row items-center gap-24">
+    <section className="w-full min-h-screen flex items-center relative pt-16 bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:bg-neutral-800 dark:bg-none text-gray-800 dark:text-gray-100">
+
+
+
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20 -translate-y-[15vh]">
+        <div className="flex flex-col-reverse xl:flex-row items-center gap-20 xl:gap-32">
           {/* LEWA STRONA */}
-          <div className="w-full xl:w-5/12 text-center xl:text-left pt-6 pb-6">
+          <div className="w-full xl:w-6/12 text-center xl:text-left fade-in-left scale-[1.05] space-y-10">
             {/* Badge */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-md mx-auto xl:mx-0 mb-8">
-            <Badge icon="controller" text="Game Dev" iconColor="text-blue-600" />
-            <Badge icon="globe" text="Web Dev" iconColor="text-purple-500" />
-            <Badge icon="cpu" text="Tech Support" iconColor="text-pink-500" />
-            <Badge icon="tools" text="Problem Solver" iconColor="text-indigo-500" />
-            <Badge icon="layout-text-window" text="UI Focused" iconColor="text-violet-600" />
-            <Badge icon="people" text="Team Player" iconColor="text-fuchsia-500" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-lg mx-auto xl:mx-0">
+              <Badge icon="controller" text="Game Dev" iconColor="text-blue-600 dark:text-blue-400" />
+              <Badge icon="globe" text="Web Dev" iconColor="text-purple-500 dark:text-purple-400" />
+              <Badge icon="cpu" text="Tech Support" iconColor="text-pink-500 dark:text-pink-400" />
+              <Badge icon="tools" text="Problem Solver" iconColor="text-indigo-500 dark:text-indigo-400" />
+              <Badge icon="layout-text-window" text="UI Focused" iconColor="text-violet-600 dark:text-violet-400" />
+              <Badge icon="people" text="Team Player" iconColor="text-fuchsia-500 dark:text-fuchsia-400" />
             </div>
-
-
 
             {/* Tagline */}
-            <p className="text-gray-500 text-sm md:text-base font-light italic mb-6">
-                Crafting digital experiences — playable or clickable.
+            <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl font-light italic text-balance leading-tight">
+              Crafting digital experiences — playable or clickable.
             </p>
 
-
-            {/* Nagłówek */}
-            <div className="min-h-[5.5rem] mb-8">
-            <AnimatedTagline />
+            {/* Animated headline */}
+            <div className="min-h-[6rem] text-balance leading-tight text-4xl md:text-5xl font-semibold">
+              <AnimatedTagline />
             </div>
 
+            {/* Przyciski */}
+            <div className="flex flex-col sm:flex-row justify-center xl:justify-start gap-6">
+              <a
+                href="/projects"
+                className="inline-flex items-center justify-center px-7 py-4 text-base font-semibold text-black dark:text-black rounded-lg overflow-hidden transition-transform duration-500 transform hover:scale-105 hover:shadow-lg"
+                style={{
+                  backgroundColor: "white",
+                  border: "2px solid transparent",
+                  borderRadius: "10px",
+                  backgroundImage:
+                    "linear-gradient(white, white), linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899)",
+                  backgroundOrigin: "border-box",
+                  backgroundClip: "padding-box, border-box",
+                  backgroundSize: "300% 300%",
+                  animation: "rainbow-border 6s linear infinite",
+                }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  <i className="bi bi-code-slash me-2" /> Explore Projects
+                </span>
+              </a>
 
-
-{/* Przyciski */}
-<div className="flex flex-col sm:flex-row justify-center xl:justify-start gap-4 mt-8">
-  <a
-    href="/projects"
-    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-black rounded-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-lg"
-    style={{
-      backgroundColor: "white", // Białe tło
-      border: "2px solid transparent", // Przezroczysta ramka
-      borderRadius: "10px",  // Zaokrąglenie rogów
-      backgroundImage:
-        "linear-gradient(white, white), linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899)", // Dopasowany gradient w odcieniach niebieskiego i fioletowego
-      backgroundOrigin: "border-box",
-      backgroundClip: "padding-box, border-box",
-      backgroundSize: "300% 300%",
-      animation: "rainbow-border 6s linear infinite", // Animacja gradientu na ramce
-    }}
-  >
-    <span className="relative z-10 flex items-center gap-2">
-      <i className="bi bi-code-slash me-2" /> Explore Projects
-    </span>
-  </a>
-
-  <a
-    href="/resume"
-    className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-black rounded-lg overflow-hidden transition-all duration-500 transform hover:scale-105 hover:shadow-lg"
-    style={{
-      backgroundColor: "white", // Białe tło
-      border: "2px solid transparent", // Przezroczysta ramka
-      borderRadius: "10px",  // Zaokrąglenie rogów
-      backgroundImage:
-        "linear-gradient(white, white), linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899)", // Dopasowany gradient w odcieniach niebieskiego i fioletowego
-      backgroundOrigin: "border-box",
-      backgroundClip: "padding-box, border-box",
-      backgroundSize: "300% 300%",
-      animation: "rainbow-border 6s linear infinite", // Animacja gradientu na ramce
-    }}
-  >
-    <span className="relative z-10 flex items-center gap-2">
-      <i className="bi bi-file-earmark-person-fill me-2" /> View Resume
-    </span>
-  </a>
-</div>
-
-
-
+              <a
+                href="/resume"
+                className="inline-flex items-center justify-center px-7 py-4 text-base font-semibold text-black dark:text-black rounded-lg overflow-hidden transition-transform duration-500 transform hover:scale-105 hover:shadow-lg"
+                style={{
+                  backgroundColor: "white",
+                  border: "2px solid transparent",
+                  borderRadius: "10px",
+                  backgroundImage:
+                    "linear-gradient(white, white), linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899)",
+                  backgroundOrigin: "border-box",
+                  backgroundClip: "padding-box, border-box",
+                  backgroundSize: "300% 300%",
+                  animation: "rainbow-border 6s linear infinite",
+                }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  <i className="bi bi-file-earmark-person-fill me-2" /> View Resume
+                </span>
+              </a>
             </div>
+          </div>
 
           {/* PRAWA STRONA */}
-          <div className="w-full xl:w-7/12 flex justify-center relative xl:ml-24">
+          <div className="w-full xl:w-6/12 flex justify-center relative xl:ml-12 fade-in-right">
+            <div className="relative p-4 rounded-[2rem] bg-[linear-gradient(270deg,#3b82f6,#8b5cf6,#ec4899)] dark:bg-[linear-gradient(270deg,#4c1d95,#6b21a8,#9333ea)] bg-[length:300%_300%] animate-rainbow-border scale-[1.1]">
+              <Image
+                src="/images/avatar-3.png"
+                alt="Krzysztof Kaszuba avatar"
+                width={540}
+                height={540}
+                className="rounded-lg z-10 relative"
+              />
 
-  <div className="relative bg-gradient-to-r from-blue-600 to-pink-500 p-4 rounded-[2rem]">
+              {/* Dots – bez zmian */}
+              <div className="absolute left-[0.75rem] top-[10rem] hidden sm:block z-0 opacity-80">
+                <DotsColumn color="#FFFFFF" />
+              </div>
+              <div className="absolute left-[2rem] top-[10rem] hidden sm:block z-0 opacity-80">
+                <DotsColumn color="#FFFFFF" />
+              </div>
+              <div className="absolute left-[-3.5rem] top-[14rem] hidden sm:block z-0 opacity-40">
+                <DotsColumn color="#A855F7" />
+              </div>
+              <div className="absolute left-[-2rem] top-[14rem] hidden sm:block z-0 opacity-40">
+                <DotsColumn color="#A855F7" />
+              </div>
 
-    <Image
-      src="/images/avatar-3.png"
-      alt="Krzysztof Kaszuba avatar"
-      width={400}
-      height={400}
-      className="rounded-lg z-10 relative"
-    />
-
-    {/* LEFT SIDE */}
-
-
-
-{/* LEFT SIDE – białe wyżej, fioletowe niżej */}
-{/* LEFT SIDE – całość przesunięta w dół */}
-<div className="absolute left-[0.75rem] top-[10rem] hidden sm:block z-0 opacity-80 animate-fade-in-up delay-200">
-  <DotsColumn color="#FFFFFF" />
-</div>
-<div className="absolute left-[2rem] top-[10rem] hidden sm:block z-0 opacity-80 animate-fade-in-up delay-300">
-  <DotsColumn color="#FFFFFF" />
-</div>
-<div className="absolute left-[-3.5rem] top-[14rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
-  <DotsColumn color="#A855F7" />
-</div>
-<div className="absolute left-[-2rem] top-[14rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
-  <DotsColumn color="#A855F7" />
-</div>
-
-{/* RIGHT SIDE – białe jeszcze dalej od avatara */}
-{/* RIGHT SIDE – białe kropki dalej od avatara (bliżej krawędzi) */}
-{/* RIGHT SIDE – białe kropki lekko na zewnątrz, ale wciąż widoczne */}
-<div className="absolute right-[1.5rem] top-[2rem] hidden sm:block z-0 opacity-80 animate-fade-in-up delay-300">
-  <DotsColumn color="#FFFFFF" />
-</div>
-<div className="absolute right-[0.5rem] top-[2rem] hidden sm:block z-0 opacity-80 animate-fade-in-up delay-200">
-  <DotsColumn color="#FFFFFF" />
-</div>
-
-{/* Fioletowe zostają jak były */}
-<div className="absolute right-[-2rem] top-[6rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
-  <DotsColumn color="#A855F7" />
-</div>
-<div className="absolute right-[-3.5rem] top-[6rem] hidden sm:block z-0 opacity-40 animate-fade-in-up delay-300">
-  <DotsColumn color="#A855F7" />
-</div>
-
-
-
-
-
-
-
-  </div>
-</div>
-
-
-
+              <div className="absolute right-[1.5rem] top-[2rem] hidden sm:block z-0 opacity-80">
+                <DotsColumn color="#FFFFFF" />
+              </div>
+              <div className="absolute right-[0.5rem] top-[2rem] hidden sm:block z-0 opacity-80">
+                <DotsColumn color="#FFFFFF" />
+              </div>
+              <div className="absolute right-[-2rem] top-[6rem] hidden sm:block z-0 opacity-40">
+                <DotsColumn color="#A855F7" />
+              </div>
+              <div className="absolute right-[-3.5rem] top-[6rem] hidden sm:block z-0 opacity-40">
+                <DotsColumn color="#A855F7" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Scroll hint */}
+      <div
+        className="absolute bottom-60 left-1/2 transform -translate-x-1/2 text-purple-600 dark:text-purple-400 text-2xl cursor-pointer animate-bounce"
+        onClick={scrollToAbout}
+      >
+        <i className="bi bi-chevron-double-down" />
       </div>
     </section>
   );
 }
-
-

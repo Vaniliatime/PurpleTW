@@ -10,6 +10,7 @@ export default function HomePage() {
       <Navbar />
       <Hero />
       <AboutMe />
+      
       <Footer />
     </main>
   );
