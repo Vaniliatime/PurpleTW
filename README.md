@@ -21,7 +21,7 @@ Personal portfolio website built with **Next.js** and **Tailwind CSS**, designed
 
 ## 🖥️ Preview
 
-![Screenshot](./public/screenshot.jpg)
+![Screenshot](./public/screenshot.png)
 
 ## 🚀 Getting Started
 
