@@ -23,13 +23,6 @@ Personal portfolio website built with **Next.js** and **Tailwind CSS**, designed
 
 ![Screenshot](./public/screenshot.jpg)
 
-    
-## 📄 License
-This project is licensed under the MIT License.
-
-## 🙋‍♂️ Author
-Krzysztof Kaszuba
-
 ## 🚀 Getting Started
 
 ```bash
@@ -37,3 +30,9 @@ git clone https://github.com/Vaniliatime/PurpleTW
 cd portfolio
 npm install
 npm run dev
+
+📄 License
+This project is licensed under the MIT License.
+
+🙋‍♂️ Author
+Krzysztof Kaszuba
