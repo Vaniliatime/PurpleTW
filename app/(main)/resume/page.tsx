@@ -73,43 +73,66 @@ export default function ResumePage() {
   const [activeSection, setActiveSection] = useState('experience');
 
   useEffect(() => {
+    let hasScrolled = false;
+  
     const handleScroll = () => {
-      const sectionElements = document.querySelectorAll('section[id]');
-      let closestSection = '';
-      let minDistance = Infinity;
-
-      sectionElements.forEach((section) => {
+      if (!hasScrolled) return; // nie aktualizuj na starcie
+  
+      const sections = document.querySelectorAll("section[id]");
+      let closestId = activeSection;
+      let closestTop = Infinity;
+  
+      sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        const distance = Math.abs(rect.top - 100); // offset for sticky nav
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestSection = section.id;
+        const offset = Math.abs(rect.top - 120); // 120 = ~navbar + filtr
+        if (offset < closestTop) {
+          closestTop = offset;
+          closestId = section.id;
         }
       });
-
-      if (closestSection && closestSection !== activeSection) {
-        setActiveSection(closestSection);
+  
+      if (closestId !== activeSection) {
+        setActiveSection(closestId);
       }
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+  
+    const handleFirstScroll = () => {
+      hasScrolled = true;
+    };
+  
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("wheel", handleFirstScroll, { passive: true });
+    window.addEventListener("touchmove", handleFirstScroll, { passive: true });
+  
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleFirstScroll);
+      window.removeEventListener("touchmove", handleFirstScroll);
+    };
   }, [activeSection]);
+  
+  
+  
+  
 
   return (
-    <main className="bg-white dark:bg-neutral-950 text-gray-800 dark:text-gray-100 px-4 md:px-8 py-16 relative z-0">
-      <div className="sticky top-0 z-50 bg-white/90 dark:bg-neutral-950/90 backdrop-blur border-b border-neutral-200 dark:border-neutral-800 mb-16">
-        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-4 py-4">
+    <main className="bg-white dark:bg-neutral-950 text-gray-800 dark:text-gray-100 px-4 md:px-8 py-4 relative z-0">
+      <div className="sticky top-16 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 shadow-md shadow-purple-500/5 transition-all duration-300 mb-16 pt-6">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3 px-4 py-3">
           {sections.map((section) => (
             <a
-              key={section.id}
-              href={`#${section.id}`}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition ${
-                activeSection === section.id
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 hover:bg-purple-200 dark:hover:bg-purple-800'
-              }`}
+            key={section.id}
+            href={`#${section.id}`}
+            onClick={() => setActiveSection(section.id)}
+
+            className={`px-4 py-2 text-sm font-semibold tracking-wide uppercase rounded-full transition-all duration-300 active:scale-95 ${
+              activeSection === section.id
+                ? 'bg-purple-600 text-white shadow-md shadow-purple-500/40'
+                : 'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 hover:bg-purple-200 dark:hover:bg-purple-800'
+            }`}
+            
             >
               {section.label}
             </a>
@@ -137,13 +160,21 @@ export default function ResumePage() {
                   <p className="text-sm text-gray-600 dark:text-gray-400 italic">{exp.date}</p>
                 </div>
                 <ul className="space-y-2">
-                  {exp.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <i className={`bi ${item.icon} text-purple-500 mt-1`} />
-                      <span>{item.text}</span>
-                    </li>
-                  ))}
-                </ul>
+              {exp.items.map((item, i) => (
+                <motion.li
+                  key={i}
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  viewport={{ once: true }}
+                >
+                  <i className={`bi ${item.icon} text-purple-500 mt-1`} />
+                  <span>{item.text}</span>
+                </motion.li>
+              ))}
+            </ul>
+
                 {exp.title === "Co-Author & Content Developer" && (
                   <div className="mt-4">
                     <a
@@ -173,6 +204,8 @@ export default function ResumePage() {
           </motion.h2>
           <div className="space-y-6">
   {/* Entry 1 */}
+  <div className="space-y-6">
+  {/* Entry 1 */}
   <div>
     <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-300">
       College of Economics and Computer Science
@@ -180,40 +213,52 @@ export default function ResumePage() {
     <p className="text-sm text-gray-600 dark:text-gray-400 italic">
       10.2018 – 10.2022
     </p>
-    <p className="text-sm text-gray-600 dark:text-gray-400">
-      Major: Computer Science and Econometrics
-    </p>
-    <p className="text-sm text-gray-600 dark:text-gray-400">
-      Specialization: Game Development
-    </p>
-    <p className="text-sm text-gray-600 dark:text-gray-400">
-      Degree: Engineer
-    </p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">Major: Computer Science and Econometrics</p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">Specialization: Game Development</p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">Degree: Engineer</p>
     <ul className="space-y-2 mt-2">
-      <li className="flex items-start gap-3">
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.05 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-mortarboard text-blue-500 mt-1" />
         <span>Earned an engineering degree (Computer Science and Econometrics) with a focus on game development.</span>
-      </li>
-      <li className="flex items-start gap-3">
+      </motion.li>
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-controller text-blue-500 mt-1" />
         <span>Specialized in Unity and C# for interactive applications and gameplay systems.</span>
-      </li>
-      <li className="flex items-start gap-3">
+      </motion.li>
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.15 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-cpu text-blue-500 mt-1" />
         <span>Built a 3D Unity-based game as part of my thesis project — includes gameplay mechanics, achievement system, and UI logic.</span>
-      </li>
-      <div className="mt-4">
-  <a
-    href="https://github.com/Vaniliatime/Vanilla-Runner"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 transition"
-  >
-    <i className="bi bi-github" />
-    View GitHub Project: Vanilia Runner
-  </a>
-</div>
+      </motion.li>
     </ul>
+    <div className="mt-4">
+      <a
+        href="https://github.com/Vaniliatime/Vanilla-Runner"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 transition"
+      >
+        <i className="bi bi-github" />
+        View GitHub Project: Vanilia Runner
+      </a>
+    </div>
   </div>
 
   {/* Entry 2 */}
@@ -224,22 +269,38 @@ export default function ResumePage() {
     <p className="text-sm text-gray-600 dark:text-gray-400 italic">
       09.2017 – 07.2018
     </p>
-    <p className="text-sm text-gray-600 dark:text-gray-400">
-      Graphic and Multimedia Design
-    </p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">Graphic and Multimedia Design</p>
     <ul className="space-y-2 mt-2">
-      <li className="flex items-start gap-3">
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.05 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-brush text-blue-500 mt-1" />
         <span>Completed a post-secondary program in graphic and multimedia design.</span>
-      </li>
-      <li className="flex items-start gap-3">
+      </motion.li>
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-image text-blue-500 mt-1" />
         <span>Gained hands-on experience with Photoshop, Illustrator, and Adobe Creative tools.</span>
-      </li>
-      <li className="flex items-start gap-3">
+      </motion.li>
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.15 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-layers text-blue-500 mt-1" />
         <span>Studied visual storytelling, layout, and user-centered digital design.</span>
-      </li>
+      </motion.li>
     </ul>
   </div>
 
@@ -251,24 +312,41 @@ export default function ResumePage() {
     <p className="text-sm text-gray-600 dark:text-gray-400 italic">
       09.2013 – 06.2017
     </p>
-    <p className="text-sm text-gray-600 dark:text-gray-400">
-      Major: IT Specialist
-    </p>
+    <p className="text-sm text-gray-600 dark:text-gray-400">Major: IT Specialist</p>
     <ul className="space-y-2 mt-2">
-      <li className="flex items-start gap-3">
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.05 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-tools text-blue-500 mt-1" />
         <span>Graduated as an IT Technician with a focus on computer systems and networking.</span>
-      </li>
-      <li className="flex items-start gap-3">
+      </motion.li>
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-hdd-network text-blue-500 mt-1" />
         <span>Built and maintained PC hardware, configured software, and solved technical issues.</span>
-      </li>
-      <li className="flex items-start gap-3">
+      </motion.li>
+      <motion.li
+        className="flex items-start gap-3"
+        initial={{ opacity: 0, x: -10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.15 }}
+        viewport={{ once: true }}
+      >
         <i className="bi bi-lightning text-blue-500 mt-1" />
         <span>Laid the foundation for future work in IT support and systems administration.</span>
-      </li>
+      </motion.li>
     </ul>
   </div>
+</div>
           </div>
         </section>
 
@@ -283,17 +361,41 @@ export default function ResumePage() {
             🛠 Skills
           </motion.h2>
           <div className="space-y-4">
-           {/* Technical Support & Systems */}
-           <div>
+  {/* Technical Support & Systems */}
+  <div>
     <h3 className="text-lg font-semibold text-pink-500">🖥 Technical Support & Systems</h3>
     <div className="space-y-2 mt-2">
-      <div className="flex items-start gap-3"><i className="bi bi-tools text-pink-400 mt-1" /><span>Remote IT Support (AnyDesk)</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-ticket-perforated text-pink-400 mt-1" /><span>Ticket Management (Jira / ServiceNow)</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-bug-fill text-pink-400 mt-1" /><span>Incident Analysis & Bug Reporting</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-hdd-network text-pink-400 mt-1" /><span>Windows Server Administration</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-microsoft text-pink-400 mt-1" /><span>Office 365 Support</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-cpu-fill text-pink-400 mt-1" /><span>Hardware Maintenance & Repair</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-person-plus-fill text-pink-400 mt-1" /><span>User Onboarding & Technical Setup</span></div>
+      {[
+        "Remote IT Support (AnyDesk)",
+        "Ticket Management (Jira / ServiceNow)",
+        "Incident Analysis & Bug Reporting",
+        "Windows Server Administration",
+        "Office 365 Support",
+        "Hardware Maintenance & Repair",
+        "User Onboarding & Technical Setup",
+      ].map((text, i) => (
+        <motion.div
+          key={i}
+          className="flex items-start gap-3"
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: i * 0.05 }}
+          viewport={{ once: true }}
+        >
+          <i className={`bi ${
+            [
+              "bi-tools",
+              "bi-ticket-perforated",
+              "bi-bug-fill",
+              "bi-hdd-network",
+              "bi-microsoft",
+              "bi-cpu-fill",
+              "bi-person-plus-fill",
+            ][i]
+          } text-pink-400 mt-1`} />
+          <span>{text}</span>
+        </motion.div>
+      ))}
     </div>
   </div>
 
@@ -301,11 +403,25 @@ export default function ResumePage() {
   <div>
     <h3 className="text-lg font-semibold text-pink-500">🛠 Software & Tools</h3>
     <div className="space-y-2 mt-2">
-      <div className="flex items-start gap-3"><i className="bi bi-code-slash text-pink-400 mt-1" /><span>C# / UnityEngine</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-git text-pink-400 mt-1" /><span>Version Control (Git)</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-brush text-pink-400 mt-1" /><span>Adobe Photoshop / Illustrator</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-soundwave text-pink-400 mt-1" /><span>Audio / Video Editing</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-database-fill text-pink-400 mt-1" /><span>Oracle SQL Troubleshooting & Querying</span></div>
+      {[
+        { icon: "bi-code-slash", text: "C# / UnityEngine" },
+        { icon: "bi-git", text: "Version Control (Git)" },
+        { icon: "bi-brush", text: "Adobe Photoshop / Illustrator" },
+        { icon: "bi-soundwave", text: "Audio / Video Editing" },
+        { icon: "bi-database-fill", text: "Oracle SQL Troubleshooting & Querying" },
+      ].map((item, i) => (
+        <motion.div
+          key={i}
+          className="flex items-start gap-3"
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: i * 0.05 }}
+          viewport={{ once: true }}
+        >
+          <i className={`${item.icon} text-pink-400 mt-1`} />
+          <span>{item.text}</span>
+        </motion.div>
+      ))}
     </div>
   </div>
 
@@ -313,13 +429,28 @@ export default function ResumePage() {
   <div>
     <h3 className="text-lg font-semibold text-pink-500">🌐 Web Development</h3>
     <div className="space-y-2 mt-2">
-      <div className="flex items-start gap-3"><i className="bi bi-filetype-html text-pink-400 mt-1" /><span>HTML5 / CSS3 / JavaScript</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-bootstrap text-pink-400 mt-1" /><span>Bootstrap / Tailwind CSS</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-wordpress text-pink-400 mt-1" /><span>WordPress Management</span></div>
-      <div className="flex items-start gap-3"><i className="bi bi-cloud-upload text-pink-400 mt-1" /><span>Digital Publishing & Website Deployment</span></div>
+      {[
+        { icon: "bi-filetype-html", text: "HTML5 / CSS3 / JavaScript" },
+        { icon: "bi-bootstrap", text: "Bootstrap / Tailwind CSS" },
+        { icon: "bi-wordpress", text: "WordPress Management" },
+        { icon: "bi-cloud-upload", text: "Digital Publishing & Website Deployment" },
+      ].map((item, i) => (
+        <motion.div
+          key={i}
+          className="flex items-start gap-3"
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: i * 0.05 }}
+          viewport={{ once: true }}
+        >
+          <i className={`${item.icon} text-pink-400 mt-1`} />
+          <span>{item.text}</span>
+        </motion.div>
+      ))}
     </div>
   </div>
 </div>
+
 </section>
 
         {/* LANGUAGES */}
@@ -333,15 +464,29 @@ export default function ResumePage() {
             🌍 Languages
           </motion.h2>
           <div className="space-y-4">
-          <div className="flex items-start gap-3">
+  <motion.div
+    className="flex items-start gap-3"
+    initial={{ opacity: 0, x: -10 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.3, delay: 0.05 }}
+    viewport={{ once: true }}
+  >
     <span className="text-2xl">🇵🇱</span>
     <span>Polish — Native</span>
-  </div>
-  <div className="flex items-start gap-3">
+  </motion.div>
+
+  <motion.div
+    className="flex items-start gap-3"
+    initial={{ opacity: 0, x: -10 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.3, delay: 0.1 }}
+    viewport={{ once: true }}
+  >
     <span className="text-2xl">🇬🇧</span>
     <span>English — C1</span>
-  </div>
-          </div>
+  </motion.div>
+</div>
+
         </section>
 
         {/* CERTIFICATES */}
@@ -354,24 +499,27 @@ export default function ResumePage() {
           >
             📜 Certificates
             </motion.h2>
-          <div className="space-y-4">
-  <div className="flex items-start gap-3">
-    <i className="bi bi-patch-check-fill text-fuchsia-500 mt-1" />
-    <span>MTA: Security Fundamentals (98-367)</span>
-  </div>
-  <div className="flex items-start gap-3">
-    <i className="bi bi-patch-check-fill text-fuchsia-500 mt-1" />
-    <span>MTA: Software Development (98-361)</span>
-  </div>
-  <div className="flex items-start gap-3">
-    <i className="bi bi-patch-check-fill text-fuchsia-500 mt-1" />
-    <span>MTA: HTML5 App Development (98-375)</span>
-  </div>
-  <div className="flex items-start gap-3">
-    <i className="bi bi-patch-check-fill text-fuchsia-500 mt-1" />
-    <span>MTA: Database Fundamentals (98-364)</span>
-  </div>
-          </div>
+            <div className="space-y-4">
+  {[
+    "MTA: Security Fundamentals (98-367)",
+    "MTA: Software Development (98-361)",
+    "MTA: HTML5 App Development (98-375)",
+    "MTA: Database Fundamentals (98-364)",
+  ].map((text, i) => (
+    <motion.div
+      key={i}
+      className="flex items-start gap-3"
+      initial={{ opacity: 0, x: -10 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3, delay: i * 0.05 }}
+      viewport={{ once: true }}
+    >
+      <i className="bi bi-patch-check-fill text-fuchsia-500 mt-1" />
+      <span>{text}</span>
+    </motion.div>
+  ))}
+</div>
+
         </section>
 
 
@@ -386,11 +534,18 @@ export default function ResumePage() {
             🚗 Other
           </motion.h2>
           <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <i className="bi bi-car-front-fill text-amber-500 mt-1" />
-              <span>Driving Licence: Category B</span>
-            </div>
-          </div>
+  <motion.div
+    className="flex items-start gap-3"
+    initial={{ opacity: 0, x: -10 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.3, delay: 0.05 }}
+    viewport={{ once: true }}
+  >
+    <i className="bi bi-car-front-fill text-amber-500 mt-1" />
+    <span>Driving Licence: Category B</span>
+  </motion.div>
+</div>
+
         </section>
 
       </div>

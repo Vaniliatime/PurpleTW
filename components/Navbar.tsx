@@ -2,19 +2,22 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
-  const [isDark, setIsDark] = useState(false);
   const pathname = usePathname();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (isDark) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [isDark]);
+    setMounted(true);
+  }, []);
+
+  // ⛔️ TO JEST KLUCZOWE!
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === "dark";
+
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -24,25 +27,28 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white dark:bg-neutral-900 shadow-md dark:shadow-none">
+    <nav className="sticky top-0 z-50 bg-white dark:bg-neutral-900 shadow-md dark:shadow-none">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        
-        {/* Logo z efektem glow */}
-        <a href="/" className="transition-transform hover:scale-105">
-          <Image
-            src={isDark ? "/Logo_KK.png" : "/Logo_KK_light.png"}
-            alt="K.K Logo"
-            width={40}
-            height={40}
-            priority
-            className={`transition-all duration-300 ${
-              isDark
-                ? "hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.7)]"
-                : "hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.4)]"
-            }`}
-          />
-        </a>
 
+                {/* Logo */}
+      <a href="/" className="transition-transform hover:scale-105 w-auto h-auto">
+  <div className="relative">
+    <Image
+      src="/Logo_KK.png"
+      alt="K.K Logo Dark"
+      width={40}
+      height={40}
+      className="hidden dark:block transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.7)]"
+    />
+    <Image
+      src="/Logo_KK_light.png"
+      alt="K.K Logo Light"
+      width={40}
+      height={40}
+      className="block dark:hidden transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.4)]"
+    />
+  </div>
+</a>
 
 
 
@@ -63,14 +69,17 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Toggle przycisk */}
+          {/* Przycisk trybu jasny/ciemny */}
           <button
-            onClick={() => setIsDark(!isDark)}
-            className="ml-4 text-xl text-purple-600 dark:text-purple-400 hover:scale-110 transition-all"
-            aria-label="Toggle dark mode"
-          >
-            <i className={`bi ${isDark ? "bi-sun-fill" : "bi-moon-fill"}`} />
-          </button>
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="ml-4 text-xl text-purple-600 dark:text-purple-400 hover:scale-110 transition-all"
+      aria-label="Toggle dark mode"
+    >
+      {mounted && (
+        <i className={`bi ${isDark ? "bi-sun-fill" : "bi-moon-fill"}`} />
+      )}
+    </button>
+
         </div>
       </div>
     </nav>
