@@ -114,12 +114,22 @@ export default function ResumePage() {
   }, [activeSection]);
   
   
-  
+  const [isVisible, setIsVisible] = useState(false);
+
+useEffect(() => {
+  const onScroll = () => {
+    setIsVisible(window.scrollY > 300);
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  return () => window.removeEventListener("scroll", onScroll);
+}, []);
+
   
 
   return (
     <main className="bg-white dark:bg-neutral-950 text-gray-800 dark:text-gray-100 px-4 md:px-8 py-4 relative z-0">
-      <div className="sticky top-16 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 shadow-md shadow-purple-500/5 transition-all duration-300 mb-16 pt-6">
+      <div className="lg:sticky top-16 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 shadow-md shadow-purple-500/5 transition-all duration-300 mb-16 pt-6">
         <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3 px-4 py-3">
           {sections.map((section) => (
             <a
@@ -552,13 +562,25 @@ export default function ResumePage() {
 
 
       {/* Floating scroll-to-top arrow */}
-      <a
-        href="#"
-        className="fixed bottom-10 right-8 z-50 text-purple-600 hover:text-purple-700 transition-all duration-300 animate-pulse"
-        aria-label="Scroll to top"
-      >
-        <i className="bi bi-arrow-up-square-fill text-4xl" />
-      </a>
+
+      {isVisible && (
+  <a
+    href="#"
+    className="fixed bottom-10 right-8 z-50 text-purple-600 hover:text-purple-700 transition-all duration-300 animate-pulse hover:scale-110"
+    aria-label="Scroll to top"
+  >
+    <i className="bi bi-arrow-up-square-fill text-4xl" />
+  </a>
+)}
+<a
+  href="#"
+  className={`fixed bottom-10 right-8 z-50 text-purple-600 hover:text-purple-700 transition-all duration-500 ease-out
+    ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"} pointer-events-auto hover:scale-110`}
+  aria-label="Scroll to top"
+>
+  <i className="bi bi-arrow-up-square-fill text-4xl" />
+</a>
+
     </main>
   );
 }

@@ -63,3 +63,7 @@
 .fade-in-up {
   animation: fade-in-us ease-out both;
 }
+
+html {
+  scroll-behavior: smooth;
+}

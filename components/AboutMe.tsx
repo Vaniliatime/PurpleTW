@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const AboutMe = () => {
   return (
     <motion.section
-      id="about-me"
-      className="bg-gray-50 dark:bg-neutral-900 pt-5 pb-20 text-gray-800 dark:text-gray-100"
+      id="about-me" 
+      className="bg-gray-50 dark:bg-neutral-900 pt-5 pb-20 text-gray-800 dark:text-gray-100 px-4 sm:px-6"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}

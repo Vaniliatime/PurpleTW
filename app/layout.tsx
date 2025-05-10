@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import ClientOnly from "@/components/ClientOnly";
 
 import { ThemeProvider } from "next-themes";
 
@@ -41,7 +44,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <ClientOnly>
+          <Navbar />
+          </ClientOnly>
           {children}
+          <ClientOnly>
+          <Footer />
+          </ClientOnly>
         </ThemeProvider>
       </body>
     </html>
