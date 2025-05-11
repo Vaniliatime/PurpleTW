@@ -1,38 +1,40 @@
-# K.K Portfolio
+# Krzysztof Kaszuba – Developer Portfolio
 
-Personal portfolio website built with **Next.js** and **Tailwind CSS**, designed to showcase professional experience, skills, and personal projects in a clean and responsive layout.
+🔗 **Live site:** [https://kkaszuba.eu](https://kkaszuba.eu)
 
-## ✨ Features
+This is my personal portfolio website built with **Next.js**, **Tailwind CSS**, and deployed as a static export.
 
-- 💼 Resume section with categorized experience, education, skills, languages & certificates
-- 🎨 Animated and responsive UI using Tailwind CSS + Framer Motion
-- 🌙 Full dark/light mode support with toggle switch
-- 🖼 Custom-designed logo with automatic theming
-- 🔗 Filter navigation and smooth scroll-to-section
-- 📱 Mobile-friendly layout with scroll-to-top action
-- 🔒 Static, no backend — fully deployable anywhere
+It showcases my experience in:
+- Full-Stack Web Development
+- Game Design & Development
+- Tech Support and Problem Solving
 
-## 🧱 Tech Stack
+## 🧰 Tech Stack
 
-- [Next.js 13+ (App Router)](https://nextjs.org/)
+- [Next.js](https://nextjs.org/) (App Router, static export)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
-- [Bootstrap Icons](https://icons.getbootstrap.com/)
+- [Formsubmit](https://formsubmit.co/) for contact form handling
+- Responsive & accessible design
+- Dark mode support
 
-## 🖥️ Preview
+## 📁 Structure
 
-![Screenshot](./public/screenshot.jpg)
+- `/app` – routing and all page logic (App Router)
+- `/components` – reusable UI components
+- `/public` – static assets (images, favicon, og-image, etc.)
 
-## 🚀 Getting Started
+## ✅ Features
+
+- Animated hero section and tagline
+- Interactive project cards with category filtering
+- Resume page with experience and skillset
+- Fully functional contact form with email delivery and redirect
+- SEO-ready (og-image, metadata, favicon, sitemap, robots.txt)
+
+## 🚀 Deploy
+
+The project is built statically using:
 
 ```bash
-git clone https://github.com/Vaniliatime/PurpleTW
-cd portfolio
-npm install
-npm run dev
-
-📄 License
-This project is licensed under the MIT License.
-
-🙋‍♂️ Author
-Krzysztof Kaszuba
+npm run build
