@@ -28,8 +28,8 @@ export default function Navbar() {
         {/* Logo */}
         <a href="/" className="transition-transform hover:scale-105 w-auto h-auto">
           <div className="relative">
-            <Image src="/Logo_KK.png" alt="Dark Logo" width={40} height={40} className="hidden dark:block" />
-            <Image src="/Logo_KK_light.png" alt="Light Logo" width={40} height={40} className="block dark:hidden" />
+            <Image src="/Logo_KK.png" alt="Dark Logo" width={40} height={40} className="hidden dark:block" unoptimized />
+            <Image src="/Logo_KK_light.png" alt="Light Logo" width={40} height={40} className="block dark:hidden" unoptimized/>
           </div>
         </a>
 

@@ -112,6 +112,7 @@ export default function HeroSection() {
                 width={540}
                 height={540}
                 className="rounded-lg z-10 relative"
+                unoptimized
               />
 
               {/* Dots – bez zmian */}
