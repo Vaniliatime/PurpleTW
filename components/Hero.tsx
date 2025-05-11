@@ -5,23 +5,30 @@ import AnimatedTagline from "./AnimatedTagline";
 import Badge from "./Badge";
 import DotsColumn from "./DotsColumn";
 
+export const metadata = {
+  title: "Home | Krzysztof Kaszuba",
+  description: "Explore the portfolio of Krzysztof Kaszuba — a Full-Stack Web Developer, Game Designer, and IT Support Specialist.",
+};
+
+
 export default function HeroSection() {
   const scrollToAbout = () => {
     const section = document.getElementById("about-me");
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
+  
   return (
     <section className="w-full min-h-screen flex items-center relative bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:bg-neutral-800 dark:bg-none text-gray-800 dark:text-gray-100">
 
-  <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20 -mt-28 sm:-mt-20 md:-mt-24 lg:-mt-28 xl:-mt-32 2xl:-mt-44">
+  <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20 mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:-mt-12 2xl:-mt-60">
         <div className="flex flex-col-reverse xl:flex-row items-center gap-20 xl:gap-32">
           {/* LEWA STRONA */}
           <div className="w-full xl:w-6/12 text-center xl:text-left fade-in-left scale-[1.05] space-y-10">
             {/* Badge */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-lg mx-auto xl:mx-0">
-              <Badge icon="controller" text="Game Dev" iconColor="text-blue-600 dark:text-blue-400" />
-              <Badge icon="globe" text="Web Dev" iconColor="text-purple-500 dark:text-purple-400" />
+              <Badge icon="globe" text="Full-Stack Web" iconColor="text-purple-500 dark:text-purple-400" />
+              <Badge icon="controller" text="Game Dev & Design" iconColor="text-blue-600 dark:text-blue-400" />
               <Badge icon="cpu" text="Tech Support" iconColor="text-pink-500 dark:text-pink-400" />
               <Badge icon="tools" text="Problem Solver" iconColor="text-indigo-500 dark:text-indigo-400" />
               <Badge icon="layout-text-window" text="UI Focused" iconColor="text-violet-600 dark:text-violet-400" />

@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 
+
+
+
 const sections = [
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },

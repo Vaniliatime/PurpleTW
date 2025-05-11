@@ -9,6 +9,26 @@ import { motion } from "framer-motion";
 
 
 const projects = [
+
+{
+  id: 11,
+  title: "LineUp EV",
+  subtitle: "Concept web app improving etiquette and transparency at EV charging stations.",
+  image: "/images/lineup-ev.png",
+  tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+  bullets: [
+    { icon: "bi-lightbulb", text: "Track charger availability, status and estimated wait times." },
+    { icon: "bi-phone", text: "Animated phone mockups with interactive status and map preview." },
+    { icon: "bi-stars", text: "Built with modular components and smooth scroll-triggered animations." },
+    { icon: "bi-layout-wtf", text: "Includes roadmap, FAQ, and animated battery-fill footer." }
+  ],
+  link: "https://vaniliatime.eu/", 
+  github: "", 
+  category: "web"
+},
+
+
+
   {// Web Ebook
     id: 1,
     title: "Kształcenie Słuchu - eBook",
@@ -22,9 +42,25 @@ const projects = [
       { icon: "bi-shield-lock", text: "Ensured secure payment processing." }
     ],
     link: "https://www.ksztalcenie-sluchu.pl",
-    github: "https://github.com/Vaniliatime",
-    category: "web",
+    github: "",
+    category: "web"
   },
+
+   { // Web old portfolio
+  id: 9,
+  title: "Old Portfolio (Bootstrap Edition)",
+  subtitle: "My first developer portfolio built with Bootstrap, PHP and custom animations.",
+  image: "/images/old_portfolio.png",
+  tech: ["Bootstrap", "PHP", "JavaScript"],
+  bullets: [
+    { icon: "bi-person-circle", text: "Presented core skills and sample projects in a clean layout." },
+    { icon: "bi-lightning", text: "Fully responsive, mobile-first design using Bootstrap 5." },
+    { icon: "bi-arrow-right", text: "Planned as a stepping stone to this current portfolio." }
+  ],
+  link: "https://kkaszuba.eu/old_portfolio",
+  github: "",
+  category: "web"
+},
 
   { // Game Vanilia Runner
     id: 2,
@@ -162,6 +198,8 @@ const projects = [
     
   },
 
+
+
   
 ];
 
@@ -190,15 +228,15 @@ const categories = [
 
   return (
     <main className="placeholder:bg-white dark:bg-neutral-950 text-gray-800 dark:text-gray-100 px-6 py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] max-w-7xl mx-auto">
-      <div className="lg:sticky top-16 z-30 bg-white/90 dark:bg-neutral-950/90 backdrop-blur  border-neutral-200 dark:border-neutral-800 shadow-sm mb-8 py-4 min-h-screen ">
+    <div className="flex flex-col lg:grid lg:grid-cols-[240px_1fr] max-w-7xl mx-auto gap-8">
+      <div className="lg:sticky top-16 z-30 bg-white/90 dark:bg-neutral-950/90 backdrop-blur  border-neutral-200 dark:border-neutral-800 mb-8 py-4">
  
-      <motion.div
+ <motion.div
   initial={{ opacity: 0, x: -20 }}
   whileInView={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.4 }}
   viewport={{ once: true }}
-  className="lg:sticky top-16 z-30 bg-white/90 dark:bg-neutral-950/90 backdrop-blur border-neutral-200 dark:border-neutral-800 shadow-sm mb-8 py-4"
+  className="lg:sticky lg:top-16 z-30 bg-white/90 dark:bg-neutral-950/90 backdrop-blur border-neutral-200 dark:border-neutral-800  py-4 px-2 rounded-xl"
 >
   <ProjectFilters
     categories={categories}
@@ -206,6 +244,7 @@ const categories = [
     onSelect={setActiveCategory}
   />
 </motion.div>
+
 
 
   </div>
